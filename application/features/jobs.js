@@ -1,0 +1,20 @@
+import Job from "../../persistence/entities/Job.js";
+
+export const createJob = async (req, res, next) => {
+    try {
+        const job = req.body;
+        await Job.create({ title: job.title });
+        return res.status(201).send();
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const getJobs = async (req, res, next) => {
+    try {
+        const jobs = await Job.find();
+        return res.status(200).json(jobs);
+    } catch (error) {
+        next(error);
+    }
+};

@@ -1,14 +1,17 @@
+import 'dotenv/config';
 import express from 'express';
-import { predict } from './model.js';
+import { connectDB } from "./persistence/db.js";
+import GlobalErrorHandlerMiddleware from './api/middleware/global-error-handling.js';
+
+import jobsRouter from './api/jobs.js';
 
 const app = express();
-app.use(express.static("dist"));
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('Successful response.');
-});
+await connectDB();
 
-app.route("/model").get(predict)
+app.use("/api/jobs", jobsRouter);
 
-app.listen(5000, () => console.log('Example app is listening on port 5000.'));
+app.use(GlobalErrorHandlerMiddleware);
+
+app.listen(8000, () => console.log('Server is listening on port 8000.'));

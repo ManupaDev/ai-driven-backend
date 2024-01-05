@@ -1,7 +1,6 @@
 // const registerUser = async (request, response) => {
 //     const user = new User(request.body);
 
-import { response } from "express";
 import { modelPrediction } from "./openai-test.js";
 
   

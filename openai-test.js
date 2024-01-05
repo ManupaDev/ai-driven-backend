@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 
-const openai = new OpenAI({apiKey:"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"});
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 export async function modelPrediction() {
   const completion = await openai.chat.completions.create({
@@ -8,6 +8,6 @@ export async function modelPrediction() {
     model: "ft:gpt-3.5-turbo-0613:stemlink:test-tutorial:8bSsUxUA",
   });
   console.log(completion.choices[0].message.content);
-  return completion.choices[0].message.content
+  return completion.choices[0].message.content  
 }
 
