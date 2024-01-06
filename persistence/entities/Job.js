@@ -25,6 +25,7 @@ const jobSchema = new mongoose.Schema({
             'What is your favorite color?',
         ],
     },
+    
 });
 
 const Job = mongoose.model("Job", jobSchema);
