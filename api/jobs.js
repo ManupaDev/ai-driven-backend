@@ -12,6 +12,6 @@ jobsRouter
   .route("/")
   .post(ClerkExpressRequireAuth({}), AuthorizationMiddleware, createJob)
   .get(getJobs);
-jobsRouter.route("/:id").get(getJobById);
+jobsRouter.route("/:id").get(ClerkExpressRequireAuth({}), getJobById);
 
 export default jobsRouter;
