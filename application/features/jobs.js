@@ -11,7 +11,7 @@ export const createJob = async (req, res, next) => {
 };
 
 export const getJobs = async (req, res, next) => {
-    try {
+    try {      
         const jobs = await Job.find().select("title type location");
         return res.status(200).json(jobs);
     } catch (error) {

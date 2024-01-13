@@ -1,9 +1,27 @@
+import { ClerkExpressRequireAuth } from "@clerk/clerk-sdk-node";
 import express from "express";
-import { createJobApplication, getJobApplications, getJobApplicationById } from "../application/features/jobApplications.js";
+import {
+  createJobApplication,
+  getJobApplicationById,
+  getJobApplications,
+} from "../application/features/jobApplications.js";
+import AuthorizationMiddleware from "./middleware/authorization-middleware.js";
 
 const jobApplicationsRouter = express.Router();
-jobApplicationsRouter.route("/").post(createJobApplication).get(getJobApplications);
-jobApplicationsRouter.route("/:id").get(getJobApplicationById);
-
+jobApplicationsRouter
+  .route("/")
+  .post(ClerkExpressRequireAuth({}), createJobApplication)
+  .get(
+    ClerkExpressRequireAuth({}),
+    AuthorizationMiddleware,
+    getJobApplications
+  );
+jobApplicationsRouter
+  .route("/:id")
+  .get(
+    ClerkExpressRequireAuth({}),
+    AuthorizationMiddleware,
+    getJobApplicationById
+  );
 
 export default jobApplicationsRouter;
