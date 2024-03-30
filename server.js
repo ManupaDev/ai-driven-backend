@@ -17,7 +17,6 @@ await connectDB();
 app.use("/api/jobs", jobsRouter);
 app.use("/api/jobApplications", jobApplicationsRouter);
 
-
 app.use(GlobalErrorHandlerMiddleware);
 
 app.listen(process.env.PORT, () => console.log('Server is listening...'));
